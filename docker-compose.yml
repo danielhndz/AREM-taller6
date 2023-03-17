@@ -1,0 +1,31 @@
+version: "2"
+
+services:
+  web:
+    build:
+      context: ./log-service
+      dockerfile: Dockerfile
+    ports:
+      - "6000" # Solo mapear el puerto 6000 del contenedor al host sin especificar un rango de puertos en el host
+
+  balancer:
+    build:
+      context: ./round-robin-load-balancer
+      dockerfile: Dockerfile
+    container_name: balancer
+    ports:
+      - "9000:6000"
+
+  db:
+    image: mongo:3.6.1
+    container_name: db
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - "6000" # Solo mapear el puerto 6000 del contenedor al host sin especificar un rango de puertos en el host
+    command: mongod
+
+volumes:
+  mongodb:
+  mongodb_config:
