@@ -1,4 +1,4 @@
-# :hammer_and_wrench: Modularización, Virtualización, Docker, AWS
+# :hammer_and_wrench: Patrones Arquitecturales
 
 ## Arquitecturas Empresariales
 
